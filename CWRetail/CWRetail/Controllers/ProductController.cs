@@ -1,6 +1,7 @@
 ﻿using CWRetail.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CWRetail.Controllers
 {
@@ -8,21 +9,17 @@ namespace CWRetail.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly DataContext _context;
+
+        public ProductController(DataContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet("GetAllProduct")]
         public async Task<ActionResult<List<Product>>> Get()
         {
-            var products = new List<Product>
-            {
-                new Product
-                {
-                    Name = "P1",
-                    Price = 1.11,
-                    Type = "Drink",
-                    Active = true,
-                }
-            };
-
-            return Ok(products);
+            return Ok(await _context.Products.ToListAsync());
         }
     }
 }

@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "hD4ElV/xkiOWdN6bXiOFmoKZ+OPFVvGFsEeqFep9V7w=",
+  "Hash": "dciOwRlbhrCUCkGw8P1hKVMIfvB0e+v+ZaWPpV75tR0=",
   "Source": "CWRetail",
   "BasePath": "_content/CWRetail",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "CWRetail\\wwwroot",
+      "Source": "CWRetail",
+      "ContentRoot": "C:\\CWRetail\\CWRetail\\CWRetail\\wwwroot\\",
+      "BasePath": "_content/CWRetail",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\CWRetail\\CWRetail\\CWRetail\\wwwroot\\product.html",
+      "SourceId": "CWRetail",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\CWRetail\\CWRetail\\CWRetail\\wwwroot\\",
+      "BasePath": "_content/CWRetail",
+      "RelativePath": "product.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\product.html"
+    }
+  ]
 }

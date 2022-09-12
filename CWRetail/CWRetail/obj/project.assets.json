@@ -2277,8 +2277,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mliu\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Ming\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2286,14 +2285,11 @@
       "projectUniqueName": "C:\\CWRetail\\CWRetail\\CWRetail\\CWRetail.csproj",
       "projectName": "CWRetail",
       "projectPath": "C:\\CWRetail\\CWRetail\\CWRetail\\CWRetail.csproj",
-      "packagesPath": "C:\\Users\\mliu\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Ming\\.nuget\\packages\\",
       "outputPath": "C:\\CWRetail\\CWRetail\\CWRetail\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\mliu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ming\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
