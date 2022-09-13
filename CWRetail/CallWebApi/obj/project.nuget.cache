@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KK3P3teIAsOtOjFWdf+5P8aVtfyar+qVMWqixe1QdL2DeIiU5QRPvwQc31XNaalafqNLvz6Y5BqxUIuJGuoTLQ==",
+  "success": true,
+  "projectFilePath": "C:\\CWRetail\\CWRetail\\CallWebApi\\CallWebApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ming\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.28\\microsoft.netcore.app.host.win-x64.3.1.28.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,42 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Product";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+})
+
+var Manager = {
+    GetAllProduct: function(){
+        var obj = ""
+            var serviceUrl = "http://localhost:5275/api/Product/GetAllProduct";
+            window.Manager.GetAPI(serviceUrl, onSuccess, onFailed);
+            function onSuccess(jsonData){
+                var x = ""
+            }
+            function onFailed(error){
+                window.alert(error.statusText);
+            }
+    },
+
+        GetAPI: function (serviceUrl, successCallback, errorCallback) {
+        $.ajax({
+            type: "GET",
+            url: serviceUrl,
+            dataType: "json",
+            success: successCallback,
+            error: errorCallback
+        });
+
+            return obj;
+    }, 
+}
+</script>
