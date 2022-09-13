@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWRetail", "CWRetail\CWRetail.csproj", "{52F535B5-BFBA-4AC3-BADA-C0D96459751D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallWebApi", "CallWebApi\CallWebApi.csproj", "{1AE59E0E-1DF9-4670-86F9-699A52CF3A02}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{52F535B5-BFBA-4AC3-BADA-C0D96459751D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F535B5-BFBA-4AC3-BADA-C0D96459751D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52F535B5-BFBA-4AC3-BADA-C0D96459751D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AE59E0E-1DF9-4670-86F9-699A52CF3A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AE59E0E-1DF9-4670-86F9-699A52CF3A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AE59E0E-1DF9-4670-86F9-699A52CF3A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AE59E0E-1DF9-4670-86F9-699A52CF3A02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
