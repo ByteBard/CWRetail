@@ -21,27 +21,33 @@ namespace CWRetail.Controllers
             _context = context;
         }
 
-        [HttpGet("GetAllProduct/{sortBy?}")]
-        public async Task<ActionResult<List<Product>>> Get(string? sortBy = null)
+        [HttpGet("GetAllProduct/{orderByAsc}/{sortBy?}")]
+        public async Task<ActionResult<List<Product>>> Get(bool orderByAsc, string? sortBy = null)
         {
             switch (sortBy?.ToLower())
             {
                 case "type":
-                    return Ok(await _context.Products.OrderBy(x => x.Type).ToListAsync());
+                    if (orderByAsc) return Ok(await _context.Products.OrderBy(x => x.Type).ToListAsync());
+                    return Ok(await _context.Products.OrderByDescending(x => x.Type).ToListAsync());
                 case "price":
-                    return Ok(await _context.Products.OrderBy(x => x.Price).ToListAsync());
+                    if (orderByAsc) return Ok(await _context.Products.OrderBy(x => x.Price).ToListAsync());
+                    return Ok(await _context.Products.OrderByDescending(x => x.Price).ToListAsync());
+                case "active":
+                    if (orderByAsc) return Ok(await _context.Products.OrderBy(x => x.Active).ToListAsync());
+                    return Ok(await _context.Products.OrderByDescending(x => x.Active).ToListAsync());
                 default:
-                    return Ok(await _context.Products.OrderBy(x => x.Name).ToListAsync());
+                    if (orderByAsc) return Ok(await _context.Products.OrderBy(x => x.Name).ToListAsync());
+                    return Ok(await _context.Products.OrderByDescending(x => x.Name).ToListAsync());
             }
-            
+
         }
 
-        [HttpPost("CreateProduct/{name}/{price}/{type}")]
-        public async Task<ActionResult> Create(string name, string price, string type)
+        [HttpPost("CreateProduct/{name}/{price}/{type}/{active}")]
+        public async Task<ActionResult> Create(string name, string price, string type, bool active)
         {
             var priceRegx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
             var isValidPrice = priceRegx.IsMatch(price);
-            
+
             if (!isValidPrice || !double.TryParse(price, out var priceNum)) return BadRequest(_invalidPriceMsg);
 
             var product = new Product
@@ -49,7 +55,7 @@ namespace CWRetail.Controllers
                 Name = name,
                 Price = priceNum,
                 Type = type,
-                Active = true
+                Active = active
             };
 
             await _context.Products.AddAsync(product);
@@ -58,8 +64,8 @@ namespace CWRetail.Controllers
 
         }
 
-        [HttpPost("UpdateProduct/{id}/{name}/{price}/{type}")]
-        public async Task<ActionResult> Update(int id, string name, string price, string type)
+        [HttpPost("UpdateProduct/{id}/{name}/{price}/{type}/{active}")]
+        public async Task<ActionResult> Update(int id, string name, string price, string type, bool active)
         {
             var priceRegx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
             var isValidPrice = priceRegx.IsMatch(price);
@@ -71,6 +77,7 @@ namespace CWRetail.Controllers
                 existingProduct.Name = name;
                 existingProduct.Type = type;
                 existingProduct.Price = priceNum;
+                existingProduct.Active = active;
                 await _context.SaveChangesAsync();
                 return Ok($"Id: {existingProduct.Id}, Name: {name} successfully updated!");
             }
@@ -82,7 +89,7 @@ namespace CWRetail.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var existingProduct = _context.Products.SingleOrDefault(b => b.Id == id);
-            if(existingProduct != null)
+            if (existingProduct != null)
             {
                 _context.Products.Remove(existingProduct);
                 await _context.SaveChangesAsync();
