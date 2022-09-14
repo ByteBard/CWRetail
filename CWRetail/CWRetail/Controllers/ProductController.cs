@@ -25,6 +25,13 @@ namespace CWRetail.Controllers
         [HttpGet("GetAllProduct/{orderByAsc}/{sortBy?}")]
         public async Task<ActionResult<List<Product>>> Get(bool orderByAsc, string? sortBy = null)
         {
+            if (!_context.Products.Any())
+            {
+                var defaultData = ProductProvider.CreateDefaultData();
+                await _context.Products.AddRangeAsync(defaultData);
+                await _context.SaveChangesAsync();
+            }
+
             switch (sortBy?.ToLower())
             {
                 case "type":
