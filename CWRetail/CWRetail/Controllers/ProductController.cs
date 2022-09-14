@@ -17,6 +17,8 @@ namespace CWRetail.Controllers
     {
         private readonly DataContext _context;
         private readonly string _invalidPriceMsg = "invalid price (should be 2 digit decimal)..";
+        private readonly string _invalidTypeMsg = "Type should not be empty";
+        private readonly string _invalidNameMsg = "Type should not be empty";
         public ProductController(DataContext context)
         {
             _context = context;
@@ -53,10 +55,13 @@ namespace CWRetail.Controllers
         [HttpPost("CreateProduct/{name}/{price}/{type}/{active}")]
         public async Task<ActionResult> Create(string name, string price, string type, bool active)
         {
+            if (string.IsNullOrEmpty(name)) return BadRequest(_invalidNameMsg);
+            if (string.IsNullOrEmpty(type)) return BadRequest(_invalidTypeMsg);
             var priceRegx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
             var isValidPrice = priceRegx.IsMatch(price);
 
             if (!isValidPrice || !double.TryParse(price, out var priceNum)) return BadRequest(_invalidPriceMsg);
+
             var product = ProductProvider.CreateProduct(name, priceNum, type, active);
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
@@ -67,6 +72,8 @@ namespace CWRetail.Controllers
         [HttpPost("UpdateProduct/{id}/{name}/{price}/{type}/{active}")]
         public async Task<ActionResult> Update(int id, string name, string price, string type, bool active)
         {
+            if (string.IsNullOrEmpty(name)) return BadRequest(_invalidNameMsg);
+            if (string.IsNullOrEmpty(type)) return BadRequest(_invalidTypeMsg);
             var priceRegx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
             var isValidPrice = priceRegx.IsMatch(price);
 
