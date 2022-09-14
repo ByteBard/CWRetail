@@ -1,4 +1,5 @@
 ﻿using CWRetail.Model;
+using CWRetail.Provider;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,15 +50,7 @@ namespace CWRetail.Controllers
             var isValidPrice = priceRegx.IsMatch(price);
 
             if (!isValidPrice || !double.TryParse(price, out var priceNum)) return BadRequest(_invalidPriceMsg);
-
-            var product = new Product
-            {
-                Name = name,
-                Price = priceNum,
-                Type = type,
-                Active = active
-            };
-
+            var product = ProductProvider.CreateProduct(name, priceNum, type, active);
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
             return Ok($"Id: {product.Id}, Name: {name} successfully created!");
@@ -74,10 +67,8 @@ namespace CWRetail.Controllers
             var existingProduct = _context.Products.SingleOrDefault(b => b.Id == id);
             if (existingProduct != null)
             {
-                existingProduct.Name = name;
-                existingProduct.Type = type;
-                existingProduct.Price = priceNum;
-                existingProduct.Active = active;
+
+                ProductProvider.GetUpdatedProduct(existingProduct, name, priceNum, type, active);
                 await _context.SaveChangesAsync();
                 return Ok($"Id: {existingProduct.Id}, Name: {name} successfully updated!");
             }
@@ -88,15 +79,14 @@ namespace CWRetail.Controllers
         [HttpPost("Delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existingProduct = _context.Products.SingleOrDefault(b => b.Id == id);
+            var existingProduct = ProductProvider.GetDeleteProduct(_context.Products.ToArray(), id);
             if (existingProduct != null)
             {
                 _context.Products.Remove(existingProduct);
                 await _context.SaveChangesAsync();
-                return Ok($"Id: {existingProduct.Id}, Name: {existingProduct} successfully deleted!");
+                return Ok("successfully deleted!");
             }
-
-            return BadRequest($"Id: {id}, removed failed (no such record)!");
+            return BadRequest("delete failed");
         }
     }
 }
