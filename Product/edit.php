@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                             <label class="form-check-label" for="activeCheck">Active</label><br><br><br>
                         </div>
                         <div class="card" style="width: 18rem;">
-                            <button type="button" id="create" class="btn btn-primary btn-lg">Edit Product</button>
+                            <button type="button" id="edit" class="btn btn-primary btn-lg">Edit Product</button>
                         </div><br>
                         <div class="card" style="width: 18rem;">
                             <button type="button" id="back" class="btn btn-secondary btn-lg">Back to Product</button>
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
-        $('#create').click(function() {
+        $('#edit').click(function() {
             isValid = true
             var productId = $('#productId').val();
             var name = $('#name').val();
@@ -118,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
             var type = $('#type').val();
             var isActive = $('#activeCheck').is(':checked');
 
-            if (name == "" || price == "") {
-                alert("Name and Price must be filled out");
+            if (name == "" || name == null || price == "" || price == null || type == "" || type == null) {
+                alert("Name, Price, or Type must be filled out");
                 isValid = false;
             }
             // int id, string name, string price, string type, bool active
